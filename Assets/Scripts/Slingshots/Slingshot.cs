@@ -45,7 +45,7 @@ namespace Slingshots
             void Shot(Vector3 direction)
             {
                 done = true;
-                print($"Direction {direction}");
+                //print($"Direction {direction}");
                 borb.EnsureNotNull().Launch(-direction * power);
             }
 
