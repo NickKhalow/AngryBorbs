@@ -11,6 +11,7 @@ namespace Slingshots
     {
         [SerializeField] private BorbTransfer borbTransfer = new();
         [SerializeField] private float power = 10;
+        [SerializeField] private float count = 3;
         [Header("Dependencies")] [SerializeField]
         private ShotPoint shotPoint = null!;
         [SerializeField] private BorbSource borbSource = null!;
@@ -25,12 +26,15 @@ namespace Slingshots
 
         private IEnumerator Start()
         {
-            while (this)
+            for (int i = 0; i < count; i++)
             {
                 var borb = borbSource.NextBorb();
                 yield return SeatBorb(borb);
                 yield return WaitShot(borb);
             }
+
+            print($"Game Over");
+                
         }
 
 
@@ -41,7 +45,7 @@ namespace Slingshots
             void Shot(Vector3 direction)
             {
                 done = true;
-                print($"Direction {direction}");
+                //print($"Direction {direction}");
                 borb.EnsureNotNull().Launch(-direction * power);
             }
 
